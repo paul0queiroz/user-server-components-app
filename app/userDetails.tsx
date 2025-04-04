@@ -7,7 +7,7 @@ interface User{
 }
 
 async function fetchUser(userId: number): Promise<User> {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);//Correção da interpolação de string na função fetchUser
     if (!res.ok) {
         throw new Error('Failed to fetch data');
     }
