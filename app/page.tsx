@@ -6,17 +6,27 @@
 // Note: This example uses TypeScript syntax.
 // You can convert it to JavaScript by removing type annotations.
 // app/page.tsx
+import React from 'react';
+import './globals.css';
+import FavoriteList from './components/FavoriteList';
+import ProductsProps from './components/Product';
 
-export default async function Home() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/1', {
-    cache: 'no-store'
-  });
-  const user = await res.json();
+
+export default function Home({children}: {children: React.ReactNode}) {
+  const favoritos = [
+    {id: 1, name: "Produto 1", description: "Descrição do Produto 1", price: 10.0},
+    {id: 2, name: "Produto 2", description: "Descrição do Produto 2", price: 20.0},
+    {id: 3, name: "Produto 3", description: "Descrição do Produto 3", price: 30.0},
+  ];
 
   return (
-    <main>
-      <h1>{user.name}</h1>
-      <p>{user.email}</p>
+    <main className="flex flex-col items-center justify-between p-24">
+      <h1 className="text-3xl font-bold">Lista de Produtos Favoritos</h1>
+      <FavoriteList>
+        {favoritos.map((prod) => (
+          <ProductsProps key={prod.id} product={prod}/>
+        ))}
+      </FavoriteList>
     </main>
-  );
+  )
 }
